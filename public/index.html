@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Zyra Messaging - Login</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"></script>
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lfv03grAAAAAN0AxBm2fuy9wVaE-7B3wteONRHw"></script>
   <script type="module" src="/js/auth.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
@@ -63,11 +66,33 @@
 <body>
   <div class="login-box">
     <h2>Welcome to Zyra Messaging</h2>
-    <input type="email" id="email" placeholder="Enter your email" required />
-    <input type="password" id="password" placeholder="Password (optional)" />
-    <button onclick="loginWithEmail()">Login</button>
-    <button onclick="sendLoginLink()">Login without Password</button>
+    <form id="login-form" onsubmit="return false;">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <input type="password" id="password" placeholder="Password (optional)" />
+      <button id="loginBtn">Login</button>
+      <button id="linkBtn">Login without Password</button>
+    </form>
     <div class="message" id="msg"></div>
   </div>
+
+  <script>
+    const siteKey = "6Lfv03grAAAAAN0AxBm2fuy9wVaE-7B3wteONRHw";
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      grecaptcha.enterprise.ready(() => {
+        grecaptcha.enterprise.execute(siteKey, {action: 'login'}).then((token) => {
+          loginWithEmail(token);
+        });
+      });
+    });
+
+    document.getElementById("linkBtn").addEventListener("click", () => {
+      grecaptcha.enterprise.ready(() => {
+        grecaptcha.enterprise.execute(siteKey, {action: 'passwordless'}).then((token) => {
+          sendLoginLink(token);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
