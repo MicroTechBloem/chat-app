@@ -22,7 +22,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-window.loginWithEmail = async function () {
+// reCAPTCHA-enabled login
+window.loginWithEmail = async function (recaptchaToken) {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
@@ -41,7 +42,8 @@ window.loginWithEmail = async function () {
   }
 };
 
-window.sendLoginLink = async function () {
+// reCAPTCHA-enabled passwordless login
+window.sendLoginLink = async function (recaptchaToken) {
   const email = document.getElementById('email').value;
   const actionCodeSettings = {
     url: window.location.href,
@@ -57,6 +59,7 @@ window.sendLoginLink = async function () {
   }
 };
 
+// If the user clicks the email login link
 if (isSignInWithEmailLink(auth, window.location.href)) {
   let email = window.localStorage.getItem("emailForSignIn");
   if (!email) email = window.prompt("Enter your email to complete sign-in");
