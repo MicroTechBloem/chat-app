@@ -1,50 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Zyra Messaging</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script defer src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore-compat.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.4.0/firebase-storage-compat.js"></script>
-  <script defer src="script.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zyra Messaging - Login</title>
+  <script type="module" src="/js/auth.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f0f2f5, #dfe6e9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      width: 360px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #2d3436;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background: #0984e3;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    button:hover {
+      background: #74b9ff;
+    }
+
+    .message {
+      font-size: 0.9rem;
+      color: #636e72;
+    }
+  </style>
 </head>
 <body>
-  <div id="auth-section">
-    <h2>Zyra Messaging</h2>
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Password" />
-    <button onclick="signIn()">Sign In</button>
-    <button onclick="signUp()">Sign Up</button>
-    <button onclick="signInWithGoogle()">Sign in with Google</button>
-    <p id="auth-message"></p>
-  </div>
-
-  <div id="chat-section" style="display: none;">
-    <div class="chat-header">
-      <h3>Zyra Chat</h3>
-      <button onclick="signOut()">Logout</button>
-    </div>
-
-    <div class="chat-window" id="messages"></div>
-
-    <div class="chat-toolbar">
-      <input type="file" id="mediaUpload" style="display: none;" />
-      <button onclick="triggerMediaUpload()">📎</button>
-      <button onclick="toggleEmojiPicker()">😊</button>
-      <button onclick="startVoiceNote()">🎤</button>
-      <button onclick="startVideoCall()">📹</button>
-      <button onclick="startVoiceCall()">📞</button>
-    </div>
-
-    <div class="chat-input">
-      <input type="text" id="messageInput" placeholder="Type a message..." />
-      <button onclick="sendMessage()">Send</button>
-    </div>
-
-    <div id="emojiPicker" style="display: none;"></div>
+  <div class="login-box">
+    <h2>Welcome to Zyra Messaging</h2>
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <input type="password" id="password" placeholder="Password (optional)" />
+    <button onclick="loginWithEmail()">Login</button>
+    <button onclick="sendLoginLink()">Login without Password</button>
+    <div class="message" id="msg"></div>
   </div>
 </body>
 </html>
