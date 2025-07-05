@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat App</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+    #chat { max-width: 600px; margin: 40px auto; background: white; padding: 20px; border-radius: 5px; }
+    #messages { list-style-type: none; padding: 0; height: 300px; overflow-y: scroll; border: 1px solid #ddd; margin-bottom: 10px; }
+    #messages li { padding: 5px 10px; border-bottom: 1px solid #eee; }
+    #userList { margin-bottom: 10px; }
+    #form { display: flex; }
+    #input { flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 3px; }
+    #send { padding: 10px 20px; border: none; background: #007bff; color: white; border-radius: 3px; cursor: pointer; }
+    #send:disabled { background: #aaa; }
+    #usernameInput, #usernameBtn { margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+  <div id="chat">
+    <div id="login">
+      <input id="usernameInput" placeholder="Enter your username" autocomplete="off" />
+      <button id="usernameBtn">Join Chat</button>
+    </div>
+    <div id="chatArea" style="display:none;">
+      <div>Users online: <span id="userList"></span></div>
+      <ul id="messages"></ul>
+      <form id="form">
+        <input id="input" autocomplete="off" placeholder="Type your message..." />
+        <button id="send" disabled>Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
